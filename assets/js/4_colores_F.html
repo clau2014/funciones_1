@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4_colores</title>
+</head>
+
+<body>
+    <section class="container" tyle="display: flex; justify-content: space-around;">
+        <div style="display: flex; flex-direction: column; align-items: center;">
+        <p style="font-size: 25px;">Da click a las cajas para pintarlas de negro.<br>También puedes volverlas a su color volviendo a dar click.</p>
+        <section class="sub_container" style="display: flex; gap: 10px;">
+            <div id="box1" class="boxes" style="width: 200px; height: 200px; background-color: blue;"></div>
+            <div id="box2" class="boxes" style="width: 200px; height: 200px; background-color: red;"></div>
+            <div id="box3" class="boxes" style="width: 200px; height: 200px; background-color: green;"></div>
+            <div id="box4" class="boxes" style="width: 200px; height: 200px; background-color: yellow;"></div>
+        </section>
+        </div>
+        <section style="display: flex; flex-direction: column; align-items: center; margin-top: 70px; margin-bottom:50px ;">
+            <div id="key" style="width: 200px; height: 200px; background-color: white; border: 2px solid black; display: flex; justify-content: center;align-items: center; font-size: 20px;">Presiona las teclas<br>"a", "s", "d"<br>observa que sucede</div>
+            <p class="text" style="font-size: 25px;">Presionas las teclas "q", "w", "e" y comienza a crear una columna de cajas de colores.</p>
+        </section>
+    </section>
+
+
+    <script>
+
+        //Función 1
+
+        const azul = document.getElementById('box1');
+        const rojo = document.getElementById('box2');
+        const verde = document.getElementById('box3');
+        const amarillo = document.getElementById('box4');
+
+        const originalColors = {
+            box1: 'blue',
+            box2: 'red',
+            box3: 'green',
+            box4: 'yellow'
+        };
+
+        azul.addEventListener('click', function() {
+            toggleColor(azul);
+        });
+        rojo.addEventListener('click', function() {
+            toggleColor(rojo);
+        });
+        verde.addEventListener('click', function() {
+            toggleColor(verde);
+        });
+        amarillo.addEventListener('click', function() {
+            toggleColor(amarillo);
+        });
+
+        function toggleColor(elemento) {
+            if (elemento.style.backgroundColor === 'black') {
+                elemento.style.backgroundColor = originalColors[elemento.id];
+            } else {
+                elemento.style.backgroundColor = 'black';
+            }
+        }
+
+        //Función 2
+
+        let currentColor;
+        const box = document.getElementById('key');
+
+        document.addEventListener('keydown', function(event) {
+            const key = event.key.toLowerCase();
+
+            switch (key) {
+                case 'a':
+                    currentColor = 'pink';
+                    break;
+                case 's':
+                    currentColor = 'orange';
+                    break;
+                case 'd':
+                    currentColor = 'cyan';
+                    break;
+                case 'q':
+                    createColoredDiv('purple');
+                    break;
+                case 'w':
+                    createColoredDiv('gray');
+                    break;
+                case 'e':
+                    createColoredDiv('brown');
+                    break;
+                default:
+                    break;
+            }
+            if (currentColor) {
+                box.style.backgroundColor = currentColor;
+            }
+        });
+
+        function createColoredDiv(color) {
+            const newDiv = document.createElement('div');
+
+            newDiv.style.width = '200px';
+            newDiv.style.height = '200px';
+            newDiv.style.backgroundColor = color;
+            newDiv.style.border = '1px solid black';
+
+            const texto =document.querySelector('.text')
+
+            texto.parentNode.insertBefore(newDiv, texto.nextSibling);
+        }
+
+    </script>
+
+</body>
+</html>
